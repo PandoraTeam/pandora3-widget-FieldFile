@@ -14,7 +14,10 @@ class FieldFile extends FormField {
 	}
 
 	protected function beforeRender(array $context): array {
-		$context = parent::beforeRender($context);
+		if ($context['id'] ?? '') {
+			$attribs = $context['attribs'] ?? '';
+			$context['attribs'] = $attribs.' id="'.$context['id'].'"';
+		}
 		if ($context['disabled'] ?? false) {
 			$attribs = $context['attribs'] ?? '';
 			$context['attribs'] = $attribs.' disabled';
